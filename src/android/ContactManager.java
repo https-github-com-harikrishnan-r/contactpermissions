@@ -317,7 +317,7 @@ public class ContactManager extends CordovaPlugin {
             Boolean bool = (Boolean) method.invoke(null, activity, permission);
             shouldShow = bool.booleanValue();
         } catch (NoSuchMethodException e) {
-            throw new Exception("shouldShowRequestPermissionRationale() method not found in ActivityCompat class.");
+           // throw new Exception("shouldShowRequestPermissionRationale() method not found in ActivityCompat class.");
         }
         return shouldShow;
     }
