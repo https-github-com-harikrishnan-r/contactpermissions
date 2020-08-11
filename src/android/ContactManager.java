@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -272,9 +273,8 @@ public class ContactManager extends CordovaPlugin {
         for(int r:grantResults)
         {
             if(r == PackageManager.PERMISSION_DENIED)
-            {
-                   Context context = this.cordova.getActivity().getApplicationContext();
-                     boolean showRationale = context.shouldShowRequestPermissionRationale( permissions );
+            {                   
+                     boolean showRationale = this.cordova.getActivity().getPackageManager().shouldShowRequestPermissionRationale(permissions);
                    if (! showRationale) {
                            this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, 22));
                 return;
