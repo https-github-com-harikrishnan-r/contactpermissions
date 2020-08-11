@@ -273,8 +273,16 @@ public class ContactManager extends CordovaPlugin {
         {
             if(r == PackageManager.PERMISSION_DENIED)
             {
+                     boolean showRationale = shouldShowRequestPermissionRationale( permission );
+                   if (! showRationale) {
+                           this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, 22));
+                return;
+                   }
+                   else
+                   {
                 this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, PERMISSION_DENIED_ERROR));
                 return;
+                   }
             }
         }
         switch(requestCode)
