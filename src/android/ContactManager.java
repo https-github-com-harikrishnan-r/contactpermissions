@@ -310,17 +310,7 @@ public class ContactManager extends CordovaPlugin {
                 break;
         }
     }
-    protected boolean shouldShowRequestPermissionRationale(Activity activity, String permission) throws Exception{
-        boolean shouldShow;
-        try {
-            java.lang.reflect.Method method = ActivityCompat.class.getMethod("shouldShowRequestPermissionRationale", Activity.class, java.lang.String.class);
-            Boolean bool = (Boolean) method.invoke(null, activity, permission);
-            shouldShow = bool.booleanValue();
-        } catch (NoSuchMethodException e) {
-           // throw new Exception("shouldShowRequestPermissionRationale() method not found in ActivityCompat class.");
-        }
-        return shouldShow;
-    }
+  
     /**
      * This plugin launches an external Activity when a contact is picked, so we
      * need to implement the save/restore API in case the Activity gets killed
@@ -332,3 +322,15 @@ public class ContactManager extends CordovaPlugin {
         this.contactAccessor = new ContactAccessorSdk5(this.cordova);
     }
 }
+
+  protected boolean shouldShowRequestPermissionRationale(Activity activity, String permission) throws Exception{
+        boolean shouldShow;
+        try {
+            java.lang.reflect.Method method = ActivityCompat.class.getMethod("shouldShowRequestPermissionRationale", Activity.class, java.lang.String.class);
+            Boolean bool = (Boolean) method.invoke(null, activity, permission);
+            shouldShow = bool.booleanValue();
+        } catch (NoSuchMethodException e) {
+           // throw new Exception("shouldShowRequestPermissionRationale() method not found in ActivityCompat class.");
+        }
+        return shouldShow;
+    }
