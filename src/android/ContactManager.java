@@ -273,8 +273,16 @@ public class ContactManager extends CordovaPlugin {
         for(int r:grantResults)
         {
             if(r == PackageManager.PERMISSION_DENIED)
-            {                   
-                     boolean showRationale = this.cordova.getActivity().getPackageManager().shouldShowRequestPermissionRationale(permissions);
+            {            
+                   
+                    for(int i=0; i<permissions.length; i++){
+            String permission = permissions[i];
+            if(!permissionsMap.containsKey(permission)){
+                throw new Exception("Permission name '"+permission+"' is not a valid permission");
+            }
+            String androidPermission = permissionsMap.get(permission);
+                   
+                       boolean showRationale = shouldShowRequestPermissionRationale(this.cordova.getActivity(), androidPermission);
                    if (! showRationale) {
                            this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, 22));
                 return;
