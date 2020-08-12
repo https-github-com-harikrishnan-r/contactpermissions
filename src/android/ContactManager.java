@@ -43,6 +43,12 @@ public class ContactManager extends CordovaPlugin {
     private ContactAccessor contactAccessor;
     private CallbackContext callbackContext;        // The callback context from which we were invoked.
     private JSONArray executeArgs;
+	
+	protected static final Map<String, String> permissionsMap;
+    static {
+	     Map<String, String> _permissionsMap = new HashMap <String, String>();
+	      permissionsMap = Collections.unmodifiableMap(_permissionsMap);
+    }
 
     private static final String LOG_TAG = "Contact Query";
 
@@ -331,10 +337,6 @@ public class ContactManager extends CordovaPlugin {
         }
         return shouldShow;
     }
-	protected static final Map<String, String> permissionsMap;
-    static {
-	     Map<String, String> _permissionsMap = new HashMap <String, String>();
-	      permissionsMap = Collections.unmodifiableMap(_permissionsMap);
-    }
+	
 	
 }
