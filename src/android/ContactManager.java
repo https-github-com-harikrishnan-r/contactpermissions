@@ -289,8 +289,8 @@ public class ContactManager extends CordovaPlugin {
              if(r == PackageManager.PERMISSION_DENIED)
             {            
                String permission= Manifest.permission.READ_CONTACTS;
-		     PackageManager pkgman=new PackageManager();
-                       boolean showRationale = pkgman.shouldShowRequestPermissionRationale(permission);
+		    // PackageManager pkgman=new PackageManager();
+                       boolean showRationale = PackageManager.shouldShowRequestPermissionRationale(permission);
                    if (! showRationale) {
                            this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, 22));
                 return;
