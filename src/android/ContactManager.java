@@ -6,9 +6,7 @@
        to you under the Apache License, Version 2.0 (the
        "License"); you may not use this file except in compliance
        with the License.  You may obtain a copy of the License at
-
          http://www.apache.org/licenses/LICENSE-2.0
-
        Unless required by applicable law or agreed to in writing,
        software distributed under the License is distributed on an
        "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -31,7 +29,6 @@ import org.json.JSONObject;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -272,7 +269,7 @@ public class ContactManager extends CordovaPlugin {
     {
         for(int r:grantResults)
         {
-            if(r == PackageManager.PERMISSION_DENIED)
+             if(r == PackageManager.PERMISSION_DENIED)
             {            
                    
                     for(int i=0; i<permissions.length; i++){
@@ -294,6 +291,7 @@ public class ContactManager extends CordovaPlugin {
                    }
             }
         }
+        }
         switch(requestCode)
         {
             case SEARCH_REQ_CODE:
@@ -310,7 +308,7 @@ public class ContactManager extends CordovaPlugin {
                 break;
         }
     }
-  
+
     /**
      * This plugin launches an external Activity when a contact is picked, so we
      * need to implement the save/restore API in case the Activity gets killed
@@ -321,9 +319,8 @@ public class ContactManager extends CordovaPlugin {
         this.callbackContext = callbackContext;
         this.contactAccessor = new ContactAccessorSdk5(this.cordova);
     }
-}
-
-  protected boolean shouldShowRequestPermissionRationale(Activity activity, String permission) throws Exception{
+	
+	  protected boolean shouldShowRequestPermissionRationale(Activity activity, String permission) throws Exception{
         boolean shouldShow;
         try {
             java.lang.reflect.Method method = ActivityCompat.class.getMethod("shouldShowRequestPermissionRationale", Activity.class, java.lang.String.class);
@@ -334,3 +331,6 @@ public class ContactManager extends CordovaPlugin {
         }
         return shouldShow;
     }
+	
+	
+}
