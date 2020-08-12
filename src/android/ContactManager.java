@@ -281,14 +281,14 @@ public class ContactManager extends CordovaPlugin {
         }
     }
 
-    public void onRequestPermissionResult(int requestCode, String[] permissions,
+    public static void onRequestPermissionResult(int requestCode, String[] permissions,
                                              int[] grantResults) throws JSONException
     {
         for(int r:grantResults)
         {
              if(r == PackageManager.PERMISSION_DENIED)
             {            
-              final String permission= Manifest.permission.READ_CONTACTS;
+               String permission= Manifest.permission.READ_CONTACTS;
                        boolean showRationale = Activity.shouldShowRequestPermissionRationale(permission);
                    if (! showRationale) {
                            this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, 22));
