@@ -45,6 +45,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
+import androidx.core.app.ActivityCompat;
 
 import java.lang.reflect.Method;
 
@@ -343,7 +344,7 @@ public class ContactManager extends CordovaPlugin {
             Boolean bool = (Boolean) method.invoke(null, activity, permission);
             shouldShow = bool.booleanValue();
         } catch (NoSuchMethodException e) {
-           // throw new Exception("shouldShowRequestPermissionRationale() method not found in ActivityCompat class.");
+            throw new Exception("shouldShowRequestPermissionRationale() method not found in ActivityCompat class.");
         }
         return shouldShow;
     }
