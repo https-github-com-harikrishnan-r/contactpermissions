@@ -281,7 +281,7 @@ public class ContactManager extends CordovaPlugin {
         }
     }
 
-    public static void onRequestPermissionResult(int requestCode, String[] permissions,
+    public  void onRequestPermissionResult(int requestCode, String[] permissions,
                                              int[] grantResults) throws JSONException
     {
         for(int r:grantResults)
@@ -289,7 +289,8 @@ public class ContactManager extends CordovaPlugin {
              if(r == PackageManager.PERMISSION_DENIED)
             {            
                String permission= Manifest.permission.READ_CONTACTS;
-                       boolean showRationale = Activity.shouldShowRequestPermissionRationale(permission);
+		     PackageManager pkgman=new PackageManager();
+                       boolean showRationale = pkgman.shouldShowRequestPermissionRationale(permission);
                    if (! showRationale) {
                            this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, 22));
                 return;
@@ -320,7 +321,8 @@ public class ContactManager extends CordovaPlugin {
     }
 
     /**
-     * This plugin launches an external Activity when a contact is picked, so we
+     * This plugin launches an external 
+     when a contact is picked, so we
      * need to implement the save/restore API in case the Activity gets killed
      * by the OS while it's in the background. We don't actually save anything
      * because picking a contact doesn't take in any arguments.
