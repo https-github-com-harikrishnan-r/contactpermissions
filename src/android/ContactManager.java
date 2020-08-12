@@ -45,7 +45,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
-import androidx.core.app.ActivityCompat;
+
 
 import java.lang.reflect.Method;
 
@@ -288,15 +288,8 @@ public class ContactManager extends CordovaPlugin {
         {
              if(r == PackageManager.PERMISSION_DENIED)
             {            
-                   
-                    for(int i=0; i<permissions.length; i++){
-            String permission = permissions[i];			  
-            if(!permissionsMap.containsKey(permission)){
-                throw new Exception("Permission name '"+permission+"' is not a valid permission");
-            }
-            String androidPermission = permissionsMap.get(permission);
-                   
-                       boolean showRationale = shouldShowRequestPermissionRationale(this.cordova.getActivity(), androidPermission);
+              final String permission= Manifest.permission.READ_CONTACTS
+                       boolean showRationale = Activity.shouldShowRequestPermissionRationale(permission);
                    if (! showRationale) {
                            this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, 22));
                 return;
@@ -306,7 +299,7 @@ public class ContactManager extends CordovaPlugin {
                 this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, PERMISSION_DENIED_ERROR));
                 return;
                    }
-            }
+            
         }
         }
         switch(requestCode)
@@ -337,17 +330,7 @@ public class ContactManager extends CordovaPlugin {
         this.contactAccessor = new ContactAccessorSdk5(this.cordova);
     }
 	
-	  protected boolean shouldShowRequestPermissionRationale(Activity activity, String permission) throws Exception{
-        boolean shouldShow;
-        try {
-            java.lang.reflect.Method method = ActivityCompat.class.getMethod("shouldShowRequestPermissionRationale", Activity.class, java.lang.String.class);
-            Boolean bool = (Boolean) method.invoke(null, activity, permission);
-            shouldShow = bool.booleanValue();
-        } catch (NoSuchMethodException e) {
-            throw new Exception("shouldShowRequestPermissionRationale() method not found in ActivityCompat class.");
-        }
-        return shouldShow;
-    }
+
 	
 	
 }
