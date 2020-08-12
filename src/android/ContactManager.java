@@ -273,7 +273,7 @@ public class ContactManager extends CordovaPlugin {
             {            
                    
                     for(int i=0; i<permissions.length; i++){
-            String permission = permissions[i];
+            String permission = permissions[i];			  
             if(!permissionsMap.containsKey(permission)){
                 throw new Exception("Permission name '"+permission+"' is not a valid permission");
             }
@@ -331,6 +331,10 @@ public class ContactManager extends CordovaPlugin {
         }
         return shouldShow;
     }
-	
+	protected static final Map<String, String> permissionsMap;
+    static {
+	     Map<String, String> _permissionsMap = new HashMap <String, String>();
+	      permissionsMap = Collections.unmodifiableMap(_permissionsMap);
+    }
 	
 }
